@@ -60,8 +60,6 @@ function orderAlphabetically(moviesArray) {
     let titles = moviesArray.map(movie => movie.title);
     titles.sort()
     let first20 = titles.slice(0, 20);
-
-    console.log(first20)
     return first20
 }
 
@@ -87,6 +85,17 @@ function turnHoursToMinutes(moviesArray) {
 }
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
+//tried many things, didn't succeed
 function bestYearAvg(moviesArray) {
-   
+    let newArray = [...moviesArray];
+    newArray.sort((a,b) => {
+        if (a.year === b.year){
+        let scoreSum = newArray.reduce((total, element) => {
+            if(element.score && a.year === b.year)
+            return total + element.score;
+            else return total
+        }, 0);}
+    })
+    console.log(newArray)
+    return scoreSum
   }
