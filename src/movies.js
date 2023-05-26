@@ -85,17 +85,30 @@ function turnHoursToMinutes(moviesArray) {
 }
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
-//tried many things, didn't succeed
 function bestYearAvg(moviesArray) {
+    if (moviesArray.length === 0){
+        return null
+    }
+    let scoresSum = {}
     let newArray = [...moviesArray];
-    newArray.sort((a,b) => {
-        if (a.year === b.year){
-        let scoreSum = newArray.reduce((total, element) => {
-            if(element.score && a.year === b.year)
-            return total + element.score;
-            else return total
-        }, 0);}
-    })
-    console.log(newArray)
-    return scoreSum
+ for (let i=1900; i<2100; i++){
+    scoresSum[i] = 0
+    let count = 0
+    for (let j=0; j<newArray.length; j++){
+    if(i===newArray[j].year){
+        scoresSum[i] += newArray[j].score
+        count++;
+    }
+ }
+    scoresSum[i] /= count;
   }
+    let maxAvg = 0 
+    let bestYear;
+    for (let year in scoresSum){
+        if (maxAvg<scoresSum[year]){
+            maxAvg = scoresSum[year]
+            bestYear= year
+        }
+    }
+return `The best year was ${bestYear} with an average score of ${maxAvg}`
+}
